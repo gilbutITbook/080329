@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql    # mysql이라는 디플로이먼트 생성
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: mysql:8.0.29     # mysql 8.0.29 버전의 파드 생성
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password      # mysql에 접속하기 위한 패스워드
+        ports:
+        - containerPort: 3306   # mysql에서 사용하는 포트
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: var/mysql   # /var/mysql 디렉터리로 볼륨 마운트
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:       # 영구 볼륨 할당 요청
+          claimName: mysql-pv-claim

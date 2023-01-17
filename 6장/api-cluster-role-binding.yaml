@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: api-cluster-role-binding
+subjects:    # 주체는 서비스 어카운트입니다
+- namespace: account
+  kind: ServiceAccount
+  name: api-service-account    
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: api-cluster-role    # api-cluster-role을 api-service-account에 매핑

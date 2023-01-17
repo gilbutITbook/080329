@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clusterip-nginx
+spec:
+  selector:
+    matchLabels:
+      run: clusterip-nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: clusterip-nginx
+    spec:
+      containers:
+      - name: clusterip-nginx
+        image: nginx
+        ports:
+        - containerPort: 80

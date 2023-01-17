@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: app-config-file
+data:
+ color: blue
+ env: prod

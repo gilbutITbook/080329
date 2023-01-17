@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+spec:
+  containers:
+    - name: test
+      image: k8s.gcr.io/hello
+      env:    
+        - name: color    
+          valueFrom:
+            configMapKeyRef:
+              name: app-config-file    
+              key: color    

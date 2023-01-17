@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual   # 영구 볼륨 클레임의 요청을 해당 영구 볼륨에 바인딩
+  capacity:
+    storage: 20Gi    # 영구 볼륨으로 20Gi 할당
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"    # 외부 저장소가 준비되지 않았기 때문에 노드의 /mnt/data 디렉터리를 볼륨으로 사용
